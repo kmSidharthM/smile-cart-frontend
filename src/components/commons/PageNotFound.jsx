@@ -7,7 +7,7 @@ const PageNotFound = () => (
       primaryButtonProps={{
         label: "Back to home",
         className: "bg-neutral-800 hover:bg-neutral-950",
-        to: "/",
+        to: "/products",
       }}
     />
   </div>
