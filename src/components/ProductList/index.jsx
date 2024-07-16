@@ -4,6 +4,7 @@ import { Search } from "@bigbinary/neeto-icons";
 import { Input, NoData } from "@bigbinary/neetoui";
 import productsApi from "apis/products";
 import { Header, PageLoader } from "components/commons";
+import useDebounce from "hooks/useDebounce";
 import { isEmpty } from "ramda";
 
 import ProductListItem from "./ProductListItem";
@@ -12,10 +13,13 @@ const ProductList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [searchKey, setSearchKey] = useState("");
+  const debouncedSearchKey = useDebounce(searchKey);
 
   const fetchProducts = async () => {
     try {
-      const { products } = await productsApi.fetch({ searchTerm: searchKey });
+      const { products } = await productsApi.fetch({
+        searchTerm: debouncedSearchKey,
+      });
       setProducts(products);
     } catch (error) {
       console.log(`Error: ${error}`);
@@ -26,7 +30,7 @@ const ProductList = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [searchKey]);
+  }, [debouncedSearchKey]);
 
   if (isLoading) {
     return <PageLoader />;
