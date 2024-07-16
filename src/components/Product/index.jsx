@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 import productsApi from "apis/products";
-import AddToCart from "components/AddToCart";
 import { Header, PageLoader, PageNotFound } from "components/commons";
+import AddToCart from "components/commons/AddToCart";
 import { Typography } from "neetoui";
 import { append, isNotNil } from "ramda";
 import { useParams } from "react-router-dom";
