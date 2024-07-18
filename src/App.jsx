@@ -1,3 +1,4 @@
+import Cart from "components/Cart";
 import { Switch, Route, Redirect } from "react-router-dom";
 import routes from "routes";
 
@@ -7,6 +8,7 @@ import ProductList from "./components/ProductList";
 
 const App = () => (
   <Switch>
+    <Route exact component={Cart} path={routes.cart} />
     <Route exact component={ProductList} path={routes.products.index} />
     <Route exact component={Product} path={routes.products.show} />
     <Redirect exact from={routes.root} to={routes.products.index} />
