@@ -8,6 +8,16 @@ const localStoragePersistor = createWebStoragePersistor({
   storage: window.localStorage,
 });
 
+const queryClient = new QueryClient({
+  queryCache: new QueryCache(),
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      staleTime: 36_00_000,
+    },
+  },
+});
+
 persistQueryClient({
   queryClient,
   persistor: localStoragePersistor,
@@ -17,16 +27,6 @@ persistQueryClient({
       [QUERY_KEYS.COUNTRIES, QUERY_KEYS.STATES].some(key =>
         queryKey.includes(key)
       ),
-  },
-});
-
-const queryClient = new QueryClient({
-  queryCache: new QueryCache(),
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      staleTime: 36_00_000,
-    },
   },
 });
 export default queryClient;
